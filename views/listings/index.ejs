@@ -1,0 +1,258 @@
+<%- layout("layouts/boilerplate") %>
+
+  <style>
+    #filters-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    #filters {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+
+    #filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter {
+      flex: 0 0 auto;
+      text-align: center;
+      margin-right: 2rem;
+      opacity: 0.7;
+    }
+
+    .filter:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    .filter p {
+      font-size: 0.8rem;
+    }
+
+    .tax-info {
+      display: none;
+    }
+
+    .text-toggle {
+      flex: 0 0 auto;
+      border: 1px solid black;
+      border-radius: 1rem;
+      padding: 0.6rem 1rem;
+      margin-left: auto;
+      margin-left: 2rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    #left-arrow {
+      left: -10px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #right-arrow {
+      right: 160px;
+    }
+
+    .scroll-btn:hover {
+      background: #f1f1f1;
+    }
+  </style>
+
+
+  <body>
+    <div id="filters-wrapper">
+      <div id="left-arrow" class="scroll-btn">
+        <i class="fa-solid fa-chevron-left"></i>
+      </div>
+
+      <div id="filters">
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Trending</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-bed"></i></div>
+          <p>Rooms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p>Iconic city</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain"></i></div>
+          <p>Mountains</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-brands fa-fort-awesome"></i></div>
+          <p>Castles</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-person-swimming"></i></div>
+          <p>Amazing pools</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-campground"></i></div>
+          <p>Campaign</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-cow"></i></div>
+          <p>Farms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-regular fa-snowflake"></i></div>
+          <p>Arctic</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-igloo"></i></div>
+          <p>Domes</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-ship"></i></div>
+          <p>Boats</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-umbrella-beach"></i></div>
+          <p>Beachfront</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-tree"></i></div>
+          <p>Treehouse</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-water"></i></div>
+          <p>Lakeside</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-house"></i></div>
+          <p>Tiny homes</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-city"></i></div>
+          <p>Urban stays</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-mug-hot"></i></div>
+          <p>Bed & Breakfast</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-hotel"></i></div>
+          <p>Hotels</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-hill-rockslide"></i></div>
+          <p>Rocky views</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-house-chimney"></i></div>
+          <p>Countryside</p>
+        </div>
+
+        <div class="filter">
+          <div><i class="fa-solid fa-person-hiking"></i></div>
+          <p>Hiking</p>
+        </div>
+      </div>
+
+      <div id="right-arrow" class="scroll-btn">
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+
+      <div class="text-toggle">
+        <div class="form-check-reverse form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">After taxes</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Your listings start below -->
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 mt-3">
+      <% for(let listing of allListings) { %>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+          <div class="card col listing-card">
+            <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 18rem;">
+            <div class="card-img-overlay"></div>
+            <div class="card-body">
+              <p class="card-text">
+                <b>
+                  <%= listing.title %>
+                </b><br>
+
+                &#2547; <%= listing.price ? listing.price.toLocaleString("en-BN") : "N/A" %> /night
+                  <i class="tax-info">&nbsp; &nbsp; +18% GPD</i>
+              </p>
+            </div>
+          </div>
+        </a>
+        <% } %>
+    </div>
+  </body>
+
+  <script>
+    const filters = document.getElementById("filters");
+    const leftArrow = document.getElementById("left-arrow");
+    const rightArrow = document.getElementById("right-arrow");
+
+    // Hide/show arrows on scroll
+    function updateArrows() {
+      if (filters.scrollLeft <= 10) {
+        leftArrow.style.opacity = 0;
+        leftArrow.style.pointerEvents = "none";
+      } else {
+        leftArrow.style.opacity = 1;
+        leftArrow.style.pointerEvents = "auto";
+      }
+    }
+
+    rightArrow.onclick = () => {
+      filters.scrollBy({ left: 300, behavior: "smooth" });
+      setTimeout(updateArrows, 400);
+    };
+
+    leftArrow.onclick = () => {
+      filters.scrollBy({ left: -300, behavior: "smooth" });
+      setTimeout(updateArrows, 400);
+    };
+
+    filters.addEventListener("scroll", updateArrows);
+
+    // TAX TOGGLE
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for (info of taxInfo) {
+        info.style.display = info.style.display !== "inline" ? "inline" : "none";
+      }
+    });
+  </script>
